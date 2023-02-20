@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building'    
-        sh 'podman build -f Dockerfile --tag default-route-openshift-image-registry.apps.tz-206240.cecc.ihost.com/python/python:latest'
+        sh 'podman build -f Dockerfile --tag image-registry.openshift-image-registry.svc:5000/python/python:latest'
       }
     }
     stage('Verification'){
@@ -13,16 +13,10 @@ pipeline {
             sh 'podman images'
         }
     }
-    stage('Authenticating with Registry'){
-        steps{
-            echo 'Logging into Openshift Image Registry'
-            sh 'podman login -u jenkins -p $(oc whoami -t)'
-        }
-    }
     stage('Pushing') {
       steps {
         echo 'Pushing'
-        sh 'podman push default-route-openshift-image-registry.apps.tz-206240.cecc.ihost.com/python/python:latest --tls-verify=false --creds jenkins:$(oc whoami -t)'
+        sh 'podman push image-registry.openshift-image-registry.svc:5000/python/python:latest --tls-verify=false'
             }
     }
   }
