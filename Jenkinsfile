@@ -22,7 +22,7 @@ pipeline {
     stage('Pushing') {
       steps {
         echo 'Pushing'
-        sh 'podman push default-route-openshift-image-registry.apps.tz-206240.cecc.ihost.com/python/python:latest --tls-verify=false'
+        sh 'podman push default-route-openshift-image-registry.apps.tz-206240.cecc.ihost.com/python/python:latest --tls-verify=false --cert $(oc whoami):$(oc whoami -t)'
             }
     }
   }
