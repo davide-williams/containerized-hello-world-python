@@ -16,13 +16,13 @@ pipeline {
     stage('Authenticating with Registry'){
         steps{
             echo 'Logging into Openshift Image Registry'
-            sh 'podman login -u $(oc whoami) -p $(oc whoami -t)'
+            sh 'podman login -u jenkins -p $(oc whoami -t)'
         }
     }
     stage('Pushing') {
       steps {
         echo 'Pushing'
-        sh 'podman push default-route-openshift-image-registry.apps.tz-206240.cecc.ihost.com/python/python:latest --tls-verify=false --creds $(oc whoami):$(oc whoami -t)'
+        sh 'podman push default-route-openshift-image-registry.apps.tz-206240.cecc.ihost.com/python/python:latest --tls-verify=false --creds jenkins:$(oc whoami -t)'
             }
     }
   }
