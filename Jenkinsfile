@@ -25,5 +25,11 @@ pipeline {
             sh 'oc new-app image-registry.openshift-image-registry.svc:5000/python/python:latest -n python'
         }
     }
+    stage('Exposing application'){
+        steps{
+            echo 'Exposing the application via Openshift Route'
+            sh 'oc -n python expose svc python'
+        }
+    }
   }
 }
