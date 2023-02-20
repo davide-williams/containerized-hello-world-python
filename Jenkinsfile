@@ -22,7 +22,9 @@ pipeline {
     stage('Creating application'){
         steps{
             echo 'Creating application in namespace Python'
-            sh 'oc new-app image-registry.openshift-image-registry.svc:5000/python/python:latest -n python'
+            sh 'oc apply -f deployment.yaml -n python'
+            sh 'oc apply -f service.yaml -n python'
+            sh 'oc apply -f route.yaml -n python'
         }
     }
     stage('Exposing application'){
