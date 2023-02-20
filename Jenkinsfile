@@ -7,10 +7,10 @@ pipeline {
         sh 'podman build -f Dockerfile --tag image-registry.openshift-image-registry.svc:5000/python/python:latest'
       }
     }
-    stage('Verification'){
+    stage('Authentication to Registry'){
         steps{
-            echo 'Verifying image was created successfully'
-            sh 'podman images'
+            echo 'Authenticating to Openshift Registry'
+            sh 'podman login -u jenkins -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000'
         }
     }
     stage('Pushing') {
