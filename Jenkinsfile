@@ -10,7 +10,7 @@ pipeline {
     stage('Authentication to Registry'){
         steps{
             echo 'Authenticating to Openshift Registry'
-            sh 'podman login -u jenkins -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000'
+            sh 'podman login -u jenkins -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000 --tls-verify=false'
         }
     }
     stage('Pushing') {
