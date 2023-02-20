@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building'    
-        sh 'podman build -f Dockerfile --tag python:knick'
+        sh 'podman build -f Dockerfile --tag default-route-openshift-image-registry.apps.tz-206240.cecc.ihost.com/python/python:latest'
       }
     }
     stage('Verification'){
