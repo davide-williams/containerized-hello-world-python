@@ -27,11 +27,5 @@ pipeline {
             sh 'oc apply -f route.yaml -n python'
         }
     }
-    stage('Exposing application'){
-        steps{
-            echo 'Exposing the application via Openshift Route'
-            sh 'oc -n python expose svc python'
-        }
-    }
   }
 }
