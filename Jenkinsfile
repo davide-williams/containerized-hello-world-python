@@ -13,6 +13,12 @@ pipeline {
             sh 'podman images'
         }
     }
+    stage('Authenticating with Registry'){
+        steps{
+            echo 'Logging into Openshift Image Registry'
+            sh 'podman login -u $(oc whoami) -p $(oc whoami -t)'
+        }
+    }
     stage('Pushing') {
       steps {
         echo 'Pushing'
