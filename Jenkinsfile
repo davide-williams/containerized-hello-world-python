@@ -7,10 +7,16 @@ pipeline {
         sh 'podman build -f Dockerfile --tag python:knick'
       }
     }
-    stage('Test') {
+    stage('Verification'){
+        steps{
+            echo 'Verifying image was created successfully'
+            sh 'podman images'
+        }
+    }
+    stage('Pushing') {
       steps {
-        echo 'Testing'
-        sh 'podman images'
+        echo 'Pushing'
+        sh 'podman push default-route-openshift-image-registry.apps.tz-206240.cecc.ihost.com/python/python:latest'
             }
     }
   }
