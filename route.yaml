@@ -1,0 +1,20 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: python
+  namespace: python
+  labels:
+    app: python
+    app.kubernetes.io/component: python
+    app.kubernetes.io/instance: python
+spec:
+  host: python-python.apps.tz-206240.cecc.ihost.com
+  to:
+    kind: Service
+    name: python
+    weight: 100
+  port:
+    targetPort: 5000-tcp
+  tls:
+    termination: edge
+  wildcardPolicy: None
