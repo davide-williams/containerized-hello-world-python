@@ -1,4 +1,5 @@
-FROM registry.access.redhat.com/ubi8/python-39:latest
+#FROM registry.access.redhat.com/ubi8/python-39:latest
+FROM registry.access.redhat.com/registry.redhat.io/ubi8/python-39:latest 
 
 WORKDIR /deployment
 
